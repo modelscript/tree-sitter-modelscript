@@ -1,0 +1,249 @@
+[
+  {
+    "type": "array_constructor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "keyed_element",
+          "named": true
+        },
+        {
+          "type": "unkeyed_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "keyed_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_constructor",
+          "named": true
+        },
+        {
+          "type": "binary_integer_literal",
+          "named": true
+        },
+        {
+          "type": "decimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "double_quoted_string_literal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "logical_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_constructor",
+          "named": true
+        },
+        {
+          "type": "octal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "module",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "array_constructor",
+          "named": true
+        },
+        {
+          "type": "binary_integer_literal",
+          "named": true
+        },
+        {
+          "type": "decimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "double_quoted_string_literal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "logical_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_constructor",
+          "named": true
+        },
+        {
+          "type": "octal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "object_constructor",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "keyed_element",
+          "named": true
+        },
+        {
+          "type": "unkeyed_element",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unkeyed_element",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "array_constructor",
+          "named": true
+        },
+        {
+          "type": "binary_integer_literal",
+          "named": true
+        },
+        {
+          "type": "decimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "double_quoted_string_literal",
+          "named": true
+        },
+        {
+          "type": "hexadecimal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "logical_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_constructor",
+          "named": true
+        },
+        {
+          "type": "octal_integer_literal",
+          "named": true
+        },
+        {
+          "type": "single_quoted_string_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "binary_integer_literal",
+    "named": true
+  },
+  {
+    "type": "decimal_integer_literal",
+    "named": true
+  },
+  {
+    "type": "double_quoted_string_literal",
+    "named": true
+  },
+  {
+    "type": "hexadecimal_integer_literal",
+    "named": true
+  },
+  {
+    "type": "logical_literal",
+    "named": true
+  },
+  {
+    "type": "null_literal",
+    "named": true
+  },
+  {
+    "type": "octal_integer_literal",
+    "named": true
+  },
+  {
+    "type": "single_quoted_string_literal",
+    "named": true
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  }
+]

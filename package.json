@@ -1,0 +1,22 @@
+{
+  "name": "@modelscript/tree-sitter-modelscript",
+  "version": "0.0.1",
+  "author": {
+    "email": "mnachawa@gmail.com",
+    "name": "Mohamad Omar Nachawati",
+    "url": "https://nachawati.me"
+  },
+  "main": "bindings/node",
+  "license": "ISC",
+  "scripts": {
+    "build": "npx tree-sitter generate",
+    "build-wasm": "npx tree-sitter generate && npx tree-sitter build-wasm",
+    "playground": "npx tree-sitter generate && npx tree-sitter build-wasm && npx tree-sitter playground"
+  },
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  }
+}
