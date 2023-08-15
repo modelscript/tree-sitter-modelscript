@@ -1,5 +1,4 @@
 const PREC = {
-    
     GROUP15: -1,
     GROUP14: 1,
     GROUP13: 2,
@@ -34,6 +33,7 @@ module.exports = grammar({
             $._literal,
             $.array_constructor,
             $.binary_expression,
+            $.conditional_expression,
             $.object_constructor,
             $.parenthesized_expression,
             $.unary_expression
@@ -120,6 +120,11 @@ module.exports = grammar({
                 ));
             }));
         },
+
+        conditional_expression: $ => choice(
+            prec.right(PREC.GROUP15, seq(field('condition', $._expression), '?', field('consequence', $._expression), ':', field('alternative', $._expression))),
+            prec.right(PREC.GROUP15, seq(field('consequence', $._expression), 'if', field('condition', $._expression), 'else', field('alternative', $._expression)))
+        ),
 
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
 
