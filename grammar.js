@@ -1,6 +1,19 @@
 const PREC = {
-    DEFAULT: 0,
-    UNARY: 1
+    GROUP1: 1,
+    GROUP2: 2,
+    GROUP3: 3,
+    GROUP4: 4,
+    GROUP5: 5,
+    GROUP6: 6,
+    GROUP7: 7,
+    GROUP8: 8,
+    GROUP9: 9,
+    GROUP10: 10,
+    GROUP11: 11,
+    GROUP12: 12,
+    GROUP13: 13,
+    GROUP14: 14,
+    GROUP15: 15
 };
 
 module.exports = grammar({
@@ -19,6 +32,7 @@ module.exports = grammar({
         _expression: $ => choice(
             $._literal,
             $.array_constructor,
+            $.binary_expression,
             $.object_constructor,
             $.unary_expression
         ),
@@ -64,7 +78,53 @@ module.exports = grammar({
 
         array_constructor: $ => seq('[', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), ']'),
 
+        binary_expression: $ => {
+            const table = [
+                ['=', PREC.GROUP15],
+                ['*=', PREC.GROUP15],
+                ['/=', PREC.GROUP15],
+                ['%=', PREC.GROUP15],
+                ['+=', PREC.GROUP15],
+                ['-=', PREC.GROUP15],
+                ['<<=', PREC.GROUP15],
+                ['>>=', PREC.GROUP15],
+                ['&=', PREC.GROUP15],
+                ['|=', PREC.GROUP15],
+                ['^=', PREC.GROUP15],
+                ['||', PREC.GROUP14],
+                ['&&', PREC.GROUP13],
+                ['|', PREC.GROUP12],
+                ['^', PREC.GROUP11],
+                ['&', PREC.GROUP10],
+                ['==', PREC.GROUP9],
+                ['!=', PREC.GROUP9],
+                ['<', PREC.GROUP8],
+                ['>', PREC.GROUP8],
+                ['<=', PREC.GROUP8],
+                ['>=', PREC.GROUP8],
+                ['<<', PREC.GROUP7],
+                ['>>', PREC.GROUP7],
+                ['+', PREC.GROUP6],
+                ['-', PREC.GROUP6],
+                ['*', PREC.GROUP5],
+                ['/', PREC.GROUP5],
+                ['%', PREC.GROUP5],
+            ];
+            return choice(...table.map(([operator, precedence]) => {
+                return prec.left(precedence, seq(
+                    field('operand1', $._expression),
+                    field('operator', operator),
+                    field('operand2', $._expression)
+                ));
+            }));
+        },
+
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
+
+        unary_expression: $ => prec.right(PREC.GROUP3, seq(
+            field('operator', choice('+', '-', '~', '!')),
+            field('operand', $._expression),
+        )),
 
         _element: $ => choice(
             $.keyed_element,
@@ -73,12 +133,7 @@ module.exports = grammar({
 
         keyed_element: $ => seq(field('key', $._expression), ':', field('value', $._expression)),
 
-        unkeyed_element: $ => field('value', $._expression),
-
-        unary_expression: $ => prec.left(PREC.UNARY, seq(
-            field('operator', choice('+', '-', '~', '!')),
-            field('operand', $._expression),
-        ))
+        unkeyed_element: $ => field('value', $._expression)
 
     }
 
