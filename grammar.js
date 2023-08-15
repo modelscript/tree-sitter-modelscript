@@ -1,3 +1,8 @@
+const PREC = {
+    DEFAULT: 0,
+    UNARY: 1
+};
+
 module.exports = grammar({
 
     name: 'modelscript',
@@ -14,19 +19,16 @@ module.exports = grammar({
         _expression: $ => choice(
             $._literal,
             $.array_constructor,
-            $.object_constructor
+            $.object_constructor,
+            $.unary_expression
         ),
 
         _literal: $ => choice(
-            $.logical_literal,
-            $.null_literal,
             $._number_literal,
-            $._string_literal
+            $._string_literal,
+            $.logical_literal,
+            $.null_literal
         ),
-
-        logical_literal: $ => token(choice('false', 'true')),
-
-        null_literal: $ => 'null',
 
         _number_literal: $ => choice(
             $._integer_literal
@@ -48,13 +50,17 @@ module.exports = grammar({
         hexadecimal_integer_literal: $ => /0x[0-9A-Fa-f]+/,
 
         _string_literal: $ => choice(
-            $.single_quoted_string_literal,
-            $.double_quoted_string_literal
+            $.double_quoted_string_literal,
+            $.single_quoted_string_literal
         ),
 
+        double_quoted_string_literal: $ => token(seq('"', /[^"]*/, '"')),
+        
         single_quoted_string_literal: $ => token(seq('\'', /[^']*/, '\'')),
 
-        double_quoted_string_literal: $ => token(seq('"', /[^"]*/, '"')),
+        logical_literal: $ => token(choice('false', 'true')),
+
+        null_literal: $ => 'null',
 
         array_constructor: $ => seq('[', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), ']'),
 
@@ -67,10 +73,13 @@ module.exports = grammar({
 
         keyed_element: $ => seq(field('key', $._expression), ':', field('value', $._expression)),
 
-        unkeyed_element: $ => field('value', $._expression)
+        unkeyed_element: $ => field('value', $._expression),
+
+        unary_expression: $ => prec.left(PREC.UNARY, seq(
+            field('operator', choice('+', '-', '~', '!')),
+            field('operand', $._expression),
+        ))
 
     }
 
 });
-
-

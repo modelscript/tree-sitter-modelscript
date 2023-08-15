@@ -36,6 +36,10 @@
         {
           "type": "SYMBOL",
           "name": "object_constructor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "unary_expression"
         }
       ]
     },
@@ -44,41 +48,21 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "logical_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "null_literal"
-        },
-        {
-          "type": "SYMBOL",
           "name": "_number_literal"
         },
         {
           "type": "SYMBOL",
           "name": "_string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "logical_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "null_literal"
         }
       ]
-    },
-    "logical_literal": {
-      "type": "TOKEN",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "false"
-          },
-          {
-            "type": "STRING",
-            "value": "true"
-          }
-        ]
-      }
-    },
-    "null_literal": {
-      "type": "STRING",
-      "value": "null"
     },
     "_number_literal": {
       "type": "CHOICE",
@@ -131,13 +115,33 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "single_quoted_string_literal"
+          "name": "double_quoted_string_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "double_quoted_string_literal"
+          "name": "single_quoted_string_literal"
         }
       ]
+    },
+    "double_quoted_string_literal": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "\""
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\"]*"
+          },
+          {
+            "type": "STRING",
+            "value": "\""
+          }
+        ]
+      }
     },
     "single_quoted_string_literal": {
       "type": "TOKEN",
@@ -159,25 +163,25 @@
         ]
       }
     },
-    "double_quoted_string_literal": {
+    "logical_literal": {
       "type": "TOKEN",
       "content": {
-        "type": "SEQ",
+        "type": "CHOICE",
         "members": [
           {
             "type": "STRING",
-            "value": "\""
-          },
-          {
-            "type": "PATTERN",
-            "value": "[^\"]*"
+            "value": "false"
           },
           {
             "type": "STRING",
-            "value": "\""
+            "value": "true"
           }
         ]
       }
+    },
+    "null_literal": {
+      "type": "STRING",
+      "value": "null"
     },
     "array_constructor": {
       "type": "SEQ",
@@ -331,6 +335,48 @@
       "content": {
         "type": "SYMBOL",
         "name": "_expression"
+      }
+    },
+    "unary_expression": {
+      "type": "PREC_LEFT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "-"
+                },
+                {
+                  "type": "STRING",
+                  "value": "~"
+                },
+                {
+                  "type": "STRING",
+                  "value": "!"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operand",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          }
+        ]
       }
     }
   },

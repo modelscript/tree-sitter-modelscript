@@ -66,6 +66,10 @@
           {
             "type": "single_quoted_string_literal",
             "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
           }
         ]
       },
@@ -111,6 +115,10 @@
           },
           {
             "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
             "named": true
           }
         ]
@@ -164,6 +172,10 @@
           {
             "type": "single_quoted_string_literal",
             "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
           }
         ]
       }
@@ -184,6 +196,84 @@
           {
             "type": "unkeyed_element",
             "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "unary_expression",
+    "named": true,
+    "fields": {
+      "operand": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "~",
+            "named": false
           }
         ]
       }
@@ -236,13 +326,29 @@
           {
             "type": "single_quoted_string_literal",
             "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
           }
         ]
       }
     }
   },
   {
+    "type": "!",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
     "named": false
   },
   {
@@ -295,6 +401,10 @@
   },
   {
     "type": "}",
+    "named": false
+  },
+  {
+    "type": "~",
     "named": false
   }
 ]
