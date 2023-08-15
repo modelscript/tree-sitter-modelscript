@@ -44,6 +44,10 @@
             "named": true
           },
           {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
             "type": "decimal_integer_literal",
             "named": true
           },
@@ -103,6 +107,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -296,6 +304,10 @@
             "named": true
           },
           {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
             "type": "decimal_integer_literal",
             "named": true
           },
@@ -358,6 +370,10 @@
             "named": true
           },
           {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
             "type": "decimal_integer_literal",
             "named": true
           },
@@ -417,6 +433,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -488,6 +508,10 @@
             "named": true
           },
           {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
             "type": "decimal_integer_literal",
             "named": true
           },
@@ -547,6 +571,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -615,6 +643,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -706,6 +738,10 @@
             "named": true
           },
           {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
             "type": "decimal_integer_literal",
             "named": true
           },
@@ -771,6 +807,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -861,6 +901,10 @@
           },
           {
             "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
             "named": true
           },
           {
@@ -1045,6 +1089,10 @@
   },
   {
     "type": "binary_integer_literal",
+    "named": true
+  },
+  {
+    "type": "context_item_expression",
     "named": true
   },
   {

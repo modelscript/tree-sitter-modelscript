@@ -43,6 +43,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "context_item_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "object_constructor"
         },
         {
@@ -1297,6 +1301,10 @@
           }
         }
       ]
+    },
+    "context_item_expression": {
+      "type": "STRING",
+      "value": "."
     },
     "object_constructor": {
       "type": "SEQ",

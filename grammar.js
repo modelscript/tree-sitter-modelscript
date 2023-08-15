@@ -34,6 +34,7 @@ module.exports = grammar({
             $.array_constructor,
             $.binary_expression,
             $.conditional_expression,
+            $.context_item_expression,
             $.object_constructor,
             $.parenthesized_expression,
             $.unary_expression
@@ -125,6 +126,8 @@ module.exports = grammar({
             prec.right(PREC.GROUP15, seq(field('condition', $._expression), '?', field('consequence', $._expression), ':', field('alternative', $._expression))),
             prec.right(PREC.GROUP15, seq(field('consequence', $._expression), 'if', field('condition', $._expression), 'else', field('alternative', $._expression)))
         ),
+
+        context_item_expression: $ => '.',
 
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
 
