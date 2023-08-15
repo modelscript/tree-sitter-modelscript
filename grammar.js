@@ -1,19 +1,20 @@
 const PREC = {
-    GROUP1: 1,
-    GROUP2: 2,
-    GROUP3: 3,
-    GROUP4: 4,
-    GROUP5: 5,
-    GROUP6: 6,
-    GROUP7: 7,
-    GROUP8: 8,
-    GROUP9: 9,
-    GROUP10: 10,
-    GROUP11: 11,
-    GROUP12: 12,
-    GROUP13: 13,
-    GROUP14: 14,
-    GROUP15: 15
+    
+    GROUP15: -1,
+    GROUP14: 1,
+    GROUP13: 2,
+    GROUP12: 3,
+    GROUP11: 4,
+    GROUP10: 5,
+    GROUP9: 6,
+    GROUP8: 7,
+    GROUP7: 8,
+    GROUP6: 9,
+    GROUP5: 10,
+    GROUP4: 11,
+    GROUP3: 12,
+    GROUP2: 13,
+    GROUP1: 14,
 };
 
 module.exports = grammar({
@@ -34,6 +35,7 @@ module.exports = grammar({
             $.array_constructor,
             $.binary_expression,
             $.object_constructor,
+            $.parenthesized_expression,
             $.unary_expression
         ),
 
@@ -120,6 +122,8 @@ module.exports = grammar({
         },
 
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
+
+        parenthesized_expression: $ => seq('(', field('expression', $._expression), ')'),
 
         unary_expression: $ => prec.right(PREC.GROUP3, seq(
             field('operator', choice('+', '-', '~', '!')),
