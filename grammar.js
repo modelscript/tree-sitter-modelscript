@@ -37,6 +37,7 @@ module.exports = grammar({
             $.context_item_expression,
             $.object_constructor,
             $.parenthesized_expression,
+            $.subscript_expression,
             $.unary_expression
         ),
 
@@ -62,7 +63,10 @@ module.exports = grammar({
 
         octal_integer_literal: $ => /0o[0-7]+/,
 
-        decimal_integer_literal: $ => /[1-9][0-9]*/,
+        decimal_integer_literal: $ => token(choice(
+            '0',
+            /[1-9][0-9]*/
+        )),
 
         hexadecimal_integer_literal: $ => /0x[0-9A-Fa-f]+/,
 
@@ -132,6 +136,8 @@ module.exports = grammar({
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
 
         parenthesized_expression: $ => seq('(', field('expression', $._expression), ')'),
+
+        subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._expression), '[', field('subscript', $._expression), ']')),
 
         unary_expression: $ => prec.right(PREC.GROUP3, seq(
             field('operator', choice('+', '-', '~', '!')),
