@@ -8,7 +8,7 @@ module.exports = grammar({
     rules: {
 
         module: $ => seq(
-            optional($._expression)
+            optional(field('expression', $._expression))
         ),
 
         _expression: $ => choice(
@@ -56,18 +56,18 @@ module.exports = grammar({
 
         double_quoted_string_literal: $ => token(seq('"', /[^"]*/, '"')),
 
-        array_constructor: $ => seq('[', optional(seq($._element, repeat(seq(',', $._element)))), ']'),
+        array_constructor: $ => seq('[', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), ']'),
 
-        object_constructor: $ => seq('{', optional(seq($._element, repeat(seq(',', $._element)))), '}'),
+        object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
 
         _element: $ => choice(
             $.keyed_element,
             $.unkeyed_element
         ),
 
-        keyed_element: $ => seq($._expression, ':', $._expression),
+        keyed_element: $ => seq(field('key', $._expression), ':', field('value', $._expression)),
 
-        unkeyed_element: $ => $._expression
+        unkeyed_element: $ => field('value', $._expression)
 
     }
 

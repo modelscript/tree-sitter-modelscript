@@ -12,9 +12,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 15
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 0
+#define FIELD_COUNT 4
 #define MAX_ALIAS_SEQUENCE_LENGTH 4
-#define PRODUCTION_ID_COUNT 1
+#define PRODUCTION_ID_COUNT 7
 
 enum {
   sym_logical_literal = 1,
@@ -214,6 +214,48 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
+};
+
+enum {
+  field_element = 1,
+  field_expression = 2,
+  field_key = 3,
+  field_value = 4,
+};
+
+static const char * const ts_field_names[] = {
+  [0] = NULL,
+  [field_element] = "element",
+  [field_expression] = "expression",
+  [field_key] = "key",
+  [field_value] = "value",
+};
+
+static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
+  [1] = {.index = 0, .length = 1},
+  [2] = {.index = 1, .length = 1},
+  [3] = {.index = 2, .length = 1},
+  [4] = {.index = 3, .length = 2},
+  [5] = {.index = 5, .length = 2},
+  [6] = {.index = 7, .length = 2},
+};
+
+static const TSFieldMapEntry ts_field_map_entries[] = {
+  [0] =
+    {field_expression, 0},
+  [1] =
+    {field_value, 0},
+  [2] =
+    {field_element, 1},
+  [3] =
+    {field_key, 0},
+    {field_value, 2},
+  [5] =
+    {field_element, 1},
+    {field_element, 2, .inherited = true},
+  [7] =
+    {field_element, 0, .inherited = true},
+    {field_element, 1, .inherited = true},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -620,22 +662,22 @@ static const uint16_t ts_small_parse_table[] = {
       anon_sym_RBRACK,
       anon_sym_RBRACE,
   [104] = 1,
-    ACTIONS(34), 3,
+    ACTIONS(50), 3,
       anon_sym_COMMA,
       anon_sym_RBRACK,
       anon_sym_RBRACE,
   [110] = 3,
     ACTIONS(40), 1,
       anon_sym_COMMA,
-    ACTIONS(50), 1,
+    ACTIONS(52), 1,
       anon_sym_RBRACK,
     STATE(15), 1,
       aux_sym_array_constructor_repeat1,
   [120] = 1,
-    ACTIONS(52), 1,
+    ACTIONS(54), 1,
       ts_builtin_sym_end,
   [124] = 1,
-    ACTIONS(54), 1,
+    ACTIONS(56), 1,
       ts_builtin_sym_end,
 };
 
@@ -669,24 +711,25 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(8),
   [15] = {.entry = {.count = 1, .reusable = true}}, SHIFT(10),
   [17] = {.entry = {.count = 1, .reusable = true}}, SHIFT(17),
-  [19] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_object_constructor, 3),
-  [21] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_object_constructor, 4),
+  [19] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_object_constructor, 3, .production_id = 3),
+  [21] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_object_constructor, 4, .production_id = 5),
   [23] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_array_constructor, 2),
-  [25] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_array_constructor, 4),
+  [25] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_array_constructor, 4, .production_id = 5),
   [27] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_object_constructor, 2),
-  [29] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_array_constructor, 3),
-  [31] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_array_constructor_repeat1, 2), SHIFT_REPEAT(4),
-  [34] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_array_constructor_repeat1, 2),
-  [36] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unkeyed_element, 1),
+  [29] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_array_constructor, 3, .production_id = 3),
+  [31] = {.entry = {.count = 2, .reusable = true}}, REDUCE(aux_sym_array_constructor_repeat1, 2, .production_id = 6), SHIFT_REPEAT(4),
+  [34] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_array_constructor_repeat1, 2, .production_id = 6),
+  [36] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_unkeyed_element, 1, .production_id = 2),
   [38] = {.entry = {.count = 1, .reusable = true}}, SHIFT(5),
   [40] = {.entry = {.count = 1, .reusable = true}}, SHIFT(4),
   [42] = {.entry = {.count = 1, .reusable = true}}, SHIFT(6),
   [44] = {.entry = {.count = 1, .reusable = true}}, SHIFT(9),
   [46] = {.entry = {.count = 1, .reusable = true}}, SHIFT(7),
-  [48] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_keyed_element, 3),
-  [50] = {.entry = {.count = 1, .reusable = true}}, SHIFT(11),
-  [52] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
-  [54] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_module, 1),
+  [48] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_keyed_element, 3, .production_id = 4),
+  [50] = {.entry = {.count = 1, .reusable = true}}, REDUCE(aux_sym_array_constructor_repeat1, 2, .production_id = 3),
+  [52] = {.entry = {.count = 1, .reusable = true}}, SHIFT(11),
+  [54] = {.entry = {.count = 1, .reusable = true}},  ACCEPT_INPUT(),
+  [56] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_module, 1, .production_id = 1),
 };
 
 #ifdef __cplusplus
@@ -713,6 +756,9 @@ extern const TSLanguage *tree_sitter_modelscript(void) {
     .small_parse_table_map = ts_small_parse_table_map,
     .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
+    .field_names = ts_field_names,
+    .field_map_slices = ts_field_map_slices,
+    .field_map_entries = ts_field_map_entries,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,

@@ -1,7 +1,4 @@
-bindings
 build
 node_modules
-binding.gyp
-Cargo.toml
 tree-sitter-modelscript.wasm
 *.ms

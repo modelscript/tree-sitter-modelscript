@@ -6,10 +6,11 @@
     "name": "Mohamad Omar Nachawati",
     "url": "https://nachawati.me"
   },
-  "main": "bindings/node",
   "license": "ISC",
+  "main": "bindings/node",
   "scripts": {
-    "build": "npx tree-sitter generate",
+    "build": "npx tree-sitter generate && node-gyp build && npx tree-sitter build-wasm",
+    "build-node": "npx tree-sitter generate && node-gyp build",
     "build-wasm": "npx tree-sitter generate && npx tree-sitter build-wasm",
     "playground": "npx tree-sitter generate && npx tree-sitter build-wasm && npx tree-sitter playground"
   },
