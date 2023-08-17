@@ -30,6 +30,13 @@ module.exports = grammar({
         ),
 
         _expression: $ => choice(
+            $._single_expression,
+            $.relation_expression
+        ),
+
+        relation_expression: $ => seq(field('subject', $._single_expression), field('property', $._single_expression), field('object', $._single_expression)),
+
+        _single_expression: $ => choice(
             $._literal,
             $.array_constructor,
             $.binary_expression,
@@ -119,16 +126,16 @@ module.exports = grammar({
             ];
             return choice(...table.map(([operator, precedence]) => {
                 return prec.left(precedence, seq(
-                    field('operand1', $._expression),
+                    field('operand1', $._single_expression),
                     field('operator', operator),
-                    field('operand2', $._expression)
+                    field('operand2', $._single_expression)
                 ));
             }));
         },
 
         conditional_expression: $ => choice(
-            prec.right(PREC.GROUP15, seq(field('condition', $._expression), '?', field('consequence', $._expression), ':', field('alternative', $._expression))),
-            prec.right(PREC.GROUP15, seq(field('consequence', $._expression), 'if', field('condition', $._expression), 'else', field('alternative', $._expression)))
+            prec.right(PREC.GROUP15, seq(field('condition', $._single_expression), '?', field('consequence', $._single_expression), ':', field('alternative', $._single_expression))),
+            prec.right(PREC.GROUP15, seq(field('consequence', $._single_expression), 'if', field('condition', $._single_expression), 'else', field('alternative', $._single_expression)))
         ),
 
         context_item_expression: $ => '.',
@@ -137,11 +144,11 @@ module.exports = grammar({
 
         parenthesized_expression: $ => seq('(', field('expression', $._expression), ')'),
 
-        subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._expression), '[', field('subscript', $._expression), ']')),
+        subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._single_expression), '[', field('subscript', $._expression), ']')),
 
         unary_expression: $ => prec.right(PREC.GROUP3, seq(
             field('operator', choice('+', '-', '~', '!')),
-            field('operand', $._expression),
+            field('operand', $._single_expression),
         )),
 
         _element: $ => choice(
@@ -149,7 +156,7 @@ module.exports = grammar({
             $.unkeyed_element
         ),
 
-        keyed_element: $ => seq(field('key', $._expression), ':', field('value', $._expression)),
+        keyed_element: $ => seq(field('key', $._single_expression), ':', field('value', $._expression)),
 
         unkeyed_element: $ => field('value', $._expression)
 
