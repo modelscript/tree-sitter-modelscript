@@ -44,8 +44,10 @@ module.exports = grammar({
             $.context_item_expression,
             $.object_constructor,
             $.parenthesized_expression,
+            $.quantified_expression,
             $.subscript_expression,
-            $.unary_expression
+            $.unary_expression,
+            $.variable
         ),
 
         _literal: $ => choice(
@@ -144,12 +146,29 @@ module.exports = grammar({
 
         parenthesized_expression: $ => seq('(', field('expression', $._expression), ')'),
 
+        quantified_expression: $ => seq(
+            field('quantifierClause', $.quantifier_clause),
+            repeat(seq(',', field('quantifierClause', $.quantifier_clause))),
+            optional(seq('where', field('condition', $._single_expression))),
+            'satisfies', field('predicate', $._single_expression)
+        ),
+
+        quantifier_clause: $ => prec.left(seq(
+            field('type', choice('every', 'some')),
+            field('quantifier', $.quantifier),
+            repeat(seq(',', field('quantifier', $.quantifier)))
+        )),
+
+        quantifier: $ => seq(field('name', $.name), optional(seq('in', field('context', $._single_expression)))),
+
         subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._single_expression), '[', field('subscript', $._expression), ']')),
 
         unary_expression: $ => prec.right(PREC.GROUP3, seq(
             field('operator', choice('+', '-', '~', '!')),
             field('operand', $._single_expression),
         )),
+
+        variable: $ => field('name', $.name),
 
         _element: $ => choice(
             $.keyed_element,
@@ -158,7 +177,9 @@ module.exports = grammar({
 
         keyed_element: $ => seq(field('key', $._single_expression), ':', field('value', $._expression)),
 
-        unkeyed_element: $ => field('value', $._expression)
+        unkeyed_element: $ => field('value', $._expression),
+
+        name: $ => /[A-Z_a-z][A-Z_a-z0-9]*/
 
     }
 

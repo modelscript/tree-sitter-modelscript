@@ -97,11 +97,19 @@
         },
         {
           "type": "SYMBOL",
+          "name": "quantified_expression"
+        },
+        {
+          "type": "SYMBOL",
           "name": "subscript_expression"
         },
         {
           "type": "SYMBOL",
           "name": "unary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "variable"
         }
       ]
     },
@@ -1439,6 +1447,168 @@
         }
       ]
     },
+    "quantified_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "quantifierClause",
+          "content": {
+            "type": "SYMBOL",
+            "name": "quantifier_clause"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "FIELD",
+                "name": "quantifierClause",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "quantifier_clause"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "where"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "condition",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_single_expression"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "satisfies"
+        },
+        {
+          "type": "FIELD",
+          "name": "predicate",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_single_expression"
+          }
+        }
+      ]
+    },
+    "quantifier_clause": {
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "type",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "every"
+                },
+                {
+                  "type": "STRING",
+                  "value": "some"
+                }
+              ]
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "quantifier",
+            "content": {
+              "type": "SYMBOL",
+              "name": "quantifier"
+            }
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "FIELD",
+                  "name": "quantifier",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "quantifier"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "quantifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "name"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "in"
+                },
+                {
+                  "type": "FIELD",
+                  "name": "context",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "_single_expression"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "subscript_expression": {
       "type": "PREC_LEFT",
       "value": 13,
@@ -1514,6 +1684,14 @@
         ]
       }
     },
+    "variable": {
+      "type": "FIELD",
+      "name": "name",
+      "content": {
+        "type": "SYMBOL",
+        "name": "name"
+      }
+    },
     "_element": {
       "type": "CHOICE",
       "members": [
@@ -1559,6 +1737,10 @@
         "type": "SYMBOL",
         "name": "_expression"
       }
+    },
+    "name": {
+      "type": "PATTERN",
+      "value": "[A-Z_a-z][A-Z_a-z0-9]*"
     }
   },
   "extras": [
