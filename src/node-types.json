@@ -304,6 +304,22 @@
     }
   },
   {
+    "type": "class",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "conditional_expression",
     "named": true,
     "fields": {
@@ -521,6 +537,94 @@
           },
           {
             "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "expression_statement",
+    "named": true,
+    "fields": {
+      "expression": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "relation_expression",
             "named": true
           },
           {
@@ -791,6 +895,20 @@
           },
           {
             "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "resource_declaration",
             "named": true
           }
         ]
@@ -1442,6 +1560,42 @@
     }
   },
   {
+    "type": "resource_declaration",
+    "named": true,
+    "fields": {
+      "class": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "class",
+            "named": true
+          }
+        ]
+      },
+      "object": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "object_constructor",
+            "named": true
+          }
+        ]
+      },
+      "resource": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "subscript_expression",
     "named": true,
     "fields": {
@@ -1891,6 +2045,10 @@
   },
   {
     "type": ":",
+    "named": false
+  },
+  {
+    "type": ";",
     "named": false
   },
   {

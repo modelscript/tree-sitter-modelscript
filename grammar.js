@@ -26,8 +26,29 @@ module.exports = grammar({
     rules: {
 
         module: $ => seq(
-            optional(field('expression', $._expression))
+            repeat(field('statement', $._statement)), optional(field('expression', $._expression))
         ),
+
+        _statement: $ => choice(
+            $.expression_statement,
+            $.resource_declaration
+        ),
+
+        expression_statement: $ => seq(field('expression', $._expression), ';'),
+
+        resource_declaration: $ => prec(PREC.GROUP14, seq(
+            field('resource', $.name),
+            choice(
+                seq(':', field('class', $._class_expression), repeat(seq(',', field('class', $._class_expression))), ';'),
+                seq(optional(seq(':', field('class', $._class_expression), repeat(seq(',', field('class', $._class_expression))))), field('object', $.object_constructor), optional(';'))
+            )
+        )),
+
+        _class_expression: $ => choice(
+            $.class
+        ),
+
+        class: $ => field('name', $.name),
 
         _expression: $ => choice(
             $._single_expression,
