@@ -1563,17 +1563,17 @@
     "type": "resource_declaration",
     "named": true,
     "fields": {
-      "class": {
-        "multiple": true,
-        "required": false,
+      "name": {
+        "multiple": false,
+        "required": true,
         "types": [
           {
-            "type": "class",
+            "type": "name",
             "named": true
           }
         ]
       },
-      "object": {
+      "properties": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1583,12 +1583,12 @@
           }
         ]
       },
-      "resource": {
-        "multiple": false,
-        "required": true,
+      "superClass": {
+        "multiple": true,
+        "required": false,
         "types": [
           {
-            "type": "name",
+            "type": "class",
             "named": true
           }
         ]

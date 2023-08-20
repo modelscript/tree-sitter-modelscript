@@ -37,10 +37,10 @@ module.exports = grammar({
         expression_statement: $ => seq(field('expression', $._expression), ';'),
 
         resource_declaration: $ => prec(PREC.GROUP14, seq(
-            field('resource', $.name),
+            field('name', $.name),
             choice(
-                seq(':', field('class', $._class_expression), repeat(seq(',', field('class', $._class_expression))), ';'),
-                seq(optional(seq(':', field('class', $._class_expression), repeat(seq(',', field('class', $._class_expression))))), field('object', $.object_constructor), optional(';'))
+                seq(':', field('superClass', $._class_expression), repeat(seq(',', field('superClass', $._class_expression))), ';'),
+                seq(optional(seq(':', field('superClass', $._class_expression), repeat(seq(',', field('superClass', $._class_expression))))), field('properties', $.object_constructor), optional(';'))
             )
         )),
 
