@@ -38,6 +38,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "empty_statement"
+        },
+        {
+          "type": "SYMBOL",
           "name": "expression_statement"
         },
         {
@@ -45,6 +49,10 @@
           "name": "resource_declaration"
         }
       ]
+    },
+    "empty_statement": {
+      "type": "STRING",
+      "value": ";"
     },
     "expression_statement": {
       "type": "SEQ",
@@ -176,18 +184,6 @@
                       "type": "SYMBOL",
                       "name": "object_constructor"
                     }
-                  },
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": ";"
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
                   }
                 ]
               }

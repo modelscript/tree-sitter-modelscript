@@ -560,6 +560,11 @@
     }
   },
   {
+    "type": "empty_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "expression_statement",
     "named": true,
     "fields": {
@@ -903,6 +908,10 @@
         "multiple": true,
         "required": false,
         "types": [
+          {
+            "type": "empty_statement",
+            "named": true
+          },
           {
             "type": "expression_statement",
             "named": true

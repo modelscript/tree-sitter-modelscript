@@ -30,9 +30,12 @@ module.exports = grammar({
         ),
 
         _statement: $ => choice(
+            $.empty_statement,
             $.expression_statement,
             $.resource_declaration
         ),
+
+        empty_statement: $ => ';',
 
         expression_statement: $ => seq(field('expression', $._expression), ';'),
 
@@ -40,7 +43,7 @@ module.exports = grammar({
             field('name', $.name),
             choice(
                 seq(':', field('superClass', $._class_expression), repeat(seq(',', field('superClass', $._class_expression))), ';'),
-                seq(optional(seq(':', field('superClass', $._class_expression), repeat(seq(',', field('superClass', $._class_expression))))), field('properties', $.object_constructor), optional(';'))
+                seq(optional(seq(':', field('superClass', $._class_expression), repeat(seq(',', field('superClass', $._class_expression))))), field('properties', $.object_constructor))
             )
         )),
 
