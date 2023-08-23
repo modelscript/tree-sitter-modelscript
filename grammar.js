@@ -23,7 +23,8 @@ module.exports = grammar({
 
     conflicts: $ => [
         [$.if_statement, $.object_constructor],
-        [$.while_statement, $.object_constructor]
+        [$.while_statement, $.object_constructor],
+        [$.function_declaration, $.variable]
     ],
 
     rules: {
@@ -37,6 +38,7 @@ module.exports = grammar({
             $.continue_statement,
             $.empty_statement,
             $.expression_statement,
+            $.function_declaration,
             $.if_statement,
             $.resource_declaration,
             $.return_statement,
@@ -52,8 +54,8 @@ module.exports = grammar({
         expression_statement: $ => seq(field('expression', $._expression), ';'),
 
         function_declaration: $ => choice(
-            seq($.name, '(', optional(seq($._parameter, repeat(seq(',', $._parameter)))), ')', '{', repeat(field('statement', $._statement)), '}'),
-            seq($.name, '(', optional(seq($._parameter, repeat(seq(',', $._parameter)))), ')', '=>', field('expression', $._expression), ';')
+            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '{', repeat(field('statement', $._statement)), '}'),
+            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '=>', field('expression', $._expression), ';')
         ),
 
         _parameter: $ => choice(
@@ -99,6 +101,7 @@ module.exports = grammar({
             $.call_expression,
             $.conditional_expression,
             $.context_item_expression,
+            $.field_expression,
             $.object_constructor,
             $.parenthesized_expression,
             $.quantified_expression,
@@ -203,12 +206,16 @@ module.exports = grammar({
 
         positional_argument: $ => field('value', $._single_expression),
 
-        conditional_expression: $ => choice(
-            prec.right(PREC.GROUP15, seq(field('condition', $._single_expression), '?', field('consequence', $._single_expression), ':', field('alternative', $._single_expression))),
-            prec.right(PREC.GROUP15, seq(field('consequence', $._single_expression), 'if', field('condition', $._single_expression), 'else', field('alternative', $._single_expression)))
-        ),
+        conditional_expression: $ => prec.right(PREC.GROUP15, seq(
+            field('consequence', $._single_expression), 'if', field('condition', $._single_expression), 'else', field('alternative', $._single_expression)
+        )),
 
         context_item_expression: $ => '.',
+
+        field_expression: $ => prec.left(PREC.GROUP2, choice(
+            seq(field('argument', $._single_expression), '.', field('field', $.name)),
+            seq(field('argument', $._single_expression), '.', '(', field('field', $._single_expression), ')'),
+        )),
 
         object_constructor: $ => seq('{', optional(seq(field('element', $._element), repeat(seq(',', field('element', $._element))))), '}'),
 
@@ -229,7 +236,7 @@ module.exports = grammar({
 
         quantifier: $ => seq(field('name', $.name), optional(seq('in', field('context', $._single_expression)))),
 
-        subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._single_expression), '[', field('subscript', $._expression), ']')),
+        subscript_expression: $ => prec.left(PREC.GROUP2, seq(field('expression', $._single_expression), '[', field('subscript', $._single_expression), repeat(seq(',', field('subscript', $._single_expression))), ']')),
 
         unary_expression: $ => prec.right(PREC.GROUP3, seq(
             field('operator', choice('+', '-', '~', '!')),
