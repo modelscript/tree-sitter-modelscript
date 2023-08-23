@@ -1,4 +1,5 @@
 const PREC = {
+    GROUP16: -2,
     GROUP15: -1,
     GROUP14: 1,
     GROUP13: 2,
@@ -21,6 +22,8 @@ module.exports = grammar({
     name: 'modelscript',
 
     conflicts: $ => [
+        [$.if_statement, $.object_constructor],
+        [$.while_statement, $.object_constructor]
     ],
 
     rules: {
@@ -30,14 +33,39 @@ module.exports = grammar({
         ),
 
         _statement: $ => choice(
+            $.break_statement,
+            $.continue_statement,
             $.empty_statement,
             $.expression_statement,
-            $.resource_declaration
+            $.if_statement,
+            $.resource_declaration,
+            $.return_statement,
+            $.while_statement
         ),
+
+        break_statement: $ => seq('break', ';'),
+
+        continue_statement: $ => seq('continue', ';'),
 
         empty_statement: $ => ';',
 
         expression_statement: $ => seq(field('expression', $._expression), ';'),
+
+        function_declaration: $ => choice(
+            seq($.name, '(', optional(seq($._parameter, repeat(seq(',', $._parameter)))), ')', '{', repeat(field('statement', $._statement)), '}'),
+            seq($.name, '(', optional(seq($._parameter, repeat(seq(',', $._parameter)))), ')', '=>', field('expression', $._expression), ';')
+        ),
+
+        _parameter: $ => choice(
+            $.simple_parameter
+        ),
+
+        simple_parameter: $ => seq(field('name', $.name), optional(seq('=', field('defaultValue', $._single_expression)))),
+
+        if_statement: $ => choice(
+            seq('if', '(', field('condition', $._single_expression), ')', field('statement', $._statement)),
+            seq('if', '(', field('condition', $._single_expression), ')', '{', repeat(field('statement', $._statement)), '}')
+        ),
 
         resource_declaration: $ => prec(PREC.GROUP14, seq(
             field('name', $.name),
@@ -47,6 +75,13 @@ module.exports = grammar({
             )
         )),
 
+        return_statement: $ => seq('return', optional(field('value', $._expression)), ';'),
+
+        while_statement: $ => choice(
+            seq('while', '(', field('condition', $._single_expression), ')', field('statement', $._statement)),
+            seq('while', '(', field('condition', $._single_expression), ')', '{', repeat(field('statement', $._statement)), '}')
+        ),
+
         _class_expression: $ => choice(
             $.class
         ),
@@ -54,16 +89,14 @@ module.exports = grammar({
         class: $ => field('name', $.name),
 
         _expression: $ => choice(
-            $._single_expression,
-            $.relation_expression
+            $._single_expression
         ),
-
-        relation_expression: $ => seq(field('subject', $._single_expression), field('property', $._single_expression), field('object', $._single_expression)),
 
         _single_expression: $ => choice(
             $._literal,
             $.array_constructor,
             $.binary_expression,
+            $.call_expression,
             $.conditional_expression,
             $.context_item_expression,
             $.object_constructor,
@@ -158,6 +191,17 @@ module.exports = grammar({
                 ));
             }));
         },
+
+        call_expression: $ => prec.left(PREC.GROUP2, seq(field('function', $._single_expression), '(', optional(seq(field('argument', $._argument), repeat(seq(',', field('argument', $._argument))))), ')')),
+
+        _argument: $ => choice(
+            $.named_argument,
+            $.positional_argument
+        ),
+
+        named_argument: $ => seq(field('name', $.name), ':', field('value', $._single_expression)),
+
+        positional_argument: $ => field('value', $._single_expression),
 
         conditional_expression: $ => choice(
             prec.right(PREC.GROUP15, seq(field('condition', $._single_expression), '?', field('consequence', $._single_expression), ':', field('alternative', $._single_expression))),

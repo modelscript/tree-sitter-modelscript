@@ -40,6 +40,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -115,6 +119,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -304,6 +312,113 @@
     }
   },
   {
+    "type": "break_statement",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "call_expression",
+    "named": true,
+    "fields": {
+      "argument": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "named_argument",
+            "named": true
+          },
+          {
+            "type": "positional_argument",
+            "named": true
+          }
+        ]
+      },
+      "function": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "class",
     "named": true,
     "fields": {
@@ -337,6 +452,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -415,6 +534,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -496,6 +619,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -558,6 +685,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "continue_statement",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "empty_statement",
@@ -585,6 +717,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -629,7 +765,91 @@
             "named": true
           },
           {
-            "type": "relation_expression",
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "if_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
             "named": true
           },
           {
@@ -646,6 +866,44 @@
           },
           {
             "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "break_statement",
+            "named": true
+          },
+          {
+            "type": "continue_statement",
+            "named": true
+          },
+          {
+            "type": "empty_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "resource_declaration",
+            "named": true
+          },
+          {
+            "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "while_statement",
             "named": true
           }
         ]
@@ -670,6 +928,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -751,6 +1013,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -792,10 +1058,6 @@
           },
           {
             "type": "quantified_expression",
-            "named": true
-          },
-          {
-            "type": "relation_expression",
             "named": true
           },
           {
@@ -839,6 +1101,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -883,10 +1149,6 @@
             "named": true
           },
           {
-            "type": "relation_expression",
-            "named": true
-          },
-          {
             "type": "single_quoted_string_literal",
             "named": true
           },
@@ -909,6 +1171,14 @@
         "required": false,
         "types": [
           {
+            "type": "break_statement",
+            "named": true
+          },
+          {
+            "type": "continue_statement",
+            "named": true
+          },
+          {
             "type": "empty_statement",
             "named": true
           },
@@ -917,7 +1187,117 @@
             "named": true
           },
           {
+            "type": "if_statement",
+            "named": true
+          },
+          {
             "type": "resource_declaration",
+            "named": true
+          },
+          {
+            "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "while_statement",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "named_argument",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
             "named": true
           }
         ]
@@ -965,6 +1345,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -1009,7 +1393,91 @@
             "named": true
           },
           {
-            "type": "relation_expression",
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "positional_argument",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
             "named": true
           },
           {
@@ -1050,6 +1518,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -1128,6 +1600,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -1222,6 +1698,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -1329,246 +1809,6 @@
     }
   },
   {
-    "type": "relation_expression",
-    "named": true,
-    "fields": {
-      "object": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array_constructor",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "binary_integer_literal",
-            "named": true
-          },
-          {
-            "type": "conditional_expression",
-            "named": true
-          },
-          {
-            "type": "context_item_expression",
-            "named": true
-          },
-          {
-            "type": "decimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "logical_literal",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "object_constructor",
-            "named": true
-          },
-          {
-            "type": "octal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "quantified_expression",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "subscript_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
-          }
-        ]
-      },
-      "property": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array_constructor",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "binary_integer_literal",
-            "named": true
-          },
-          {
-            "type": "conditional_expression",
-            "named": true
-          },
-          {
-            "type": "context_item_expression",
-            "named": true
-          },
-          {
-            "type": "decimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "logical_literal",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "object_constructor",
-            "named": true
-          },
-          {
-            "type": "octal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "quantified_expression",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "subscript_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
-          }
-        ]
-      },
-      "subject": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "array_constructor",
-            "named": true
-          },
-          {
-            "type": "binary_expression",
-            "named": true
-          },
-          {
-            "type": "binary_integer_literal",
-            "named": true
-          },
-          {
-            "type": "conditional_expression",
-            "named": true
-          },
-          {
-            "type": "context_item_expression",
-            "named": true
-          },
-          {
-            "type": "decimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "double_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "hexadecimal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "logical_literal",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "object_constructor",
-            "named": true
-          },
-          {
-            "type": "octal_integer_literal",
-            "named": true
-          },
-          {
-            "type": "parenthesized_expression",
-            "named": true
-          },
-          {
-            "type": "quantified_expression",
-            "named": true
-          },
-          {
-            "type": "single_quoted_string_literal",
-            "named": true
-          },
-          {
-            "type": "subscript_expression",
-            "named": true
-          },
-          {
-            "type": "unary_expression",
-            "named": true
-          },
-          {
-            "type": "variable",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "resource_declaration",
     "named": true,
     "fields": {
@@ -1605,6 +1845,192 @@
     }
   },
   {
+    "type": "return_statement",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "simple_parameter",
+    "named": true,
+    "fields": {
+      "defaultValue": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "subscript_expression",
     "named": true,
     "fields": {
@@ -1622,6 +2048,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -1703,6 +2133,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -1747,10 +2181,6 @@
             "named": true
           },
           {
-            "type": "relation_expression",
-            "named": true
-          },
-          {
             "type": "single_quoted_string_literal",
             "named": true
           },
@@ -1788,6 +2218,10 @@
           },
           {
             "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
             "named": true
           },
           {
@@ -1897,6 +2331,10 @@
             "named": true
           },
           {
+            "type": "call_expression",
+            "named": true
+          },
+          {
             "type": "conditional_expression",
             "named": true
           },
@@ -1941,10 +2379,6 @@
             "named": true
           },
           {
-            "type": "relation_expression",
-            "named": true
-          },
-          {
             "type": "single_quoted_string_literal",
             "named": true
           },
@@ -1974,6 +2408,132 @@
         "types": [
           {
             "type": "name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_constructor",
+            "named": true
+          },
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "binary_integer_literal",
+            "named": true
+          },
+          {
+            "type": "call_expression",
+            "named": true
+          },
+          {
+            "type": "conditional_expression",
+            "named": true
+          },
+          {
+            "type": "context_item_expression",
+            "named": true
+          },
+          {
+            "type": "decimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "double_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "hexadecimal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "logical_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_constructor",
+            "named": true
+          },
+          {
+            "type": "octal_integer_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "quantified_expression",
+            "named": true
+          },
+          {
+            "type": "single_quoted_string_literal",
+            "named": true
+          },
+          {
+            "type": "subscript_expression",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "variable",
+            "named": true
+          }
+        ]
+      },
+      "statement": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "break_statement",
+            "named": true
+          },
+          {
+            "type": "continue_statement",
+            "named": true
+          },
+          {
+            "type": "empty_statement",
+            "named": true
+          },
+          {
+            "type": "expression_statement",
+            "named": true
+          },
+          {
+            "type": "if_statement",
+            "named": true
+          },
+          {
+            "type": "resource_declaration",
+            "named": true
+          },
+          {
+            "type": "return_statement",
+            "named": true
+          },
+          {
+            "type": "while_statement",
             "named": true
           }
         ]
@@ -2085,6 +2645,10 @@
     "named": false
   },
   {
+    "type": "=>",
+    "named": false
+  },
+  {
     "type": ">",
     "named": false
   },
@@ -2125,8 +2689,16 @@
     "named": true
   },
   {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "context_item_expression",
     "named": true
+  },
+  {
+    "type": "continue",
+    "named": false
   },
   {
     "type": "decimal_integer_literal",
@@ -2173,6 +2745,10 @@
     "named": true
   },
   {
+    "type": "return",
+    "named": false
+  },
+  {
     "type": "satisfies",
     "named": false
   },
@@ -2186,6 +2762,10 @@
   },
   {
     "type": "where",
+    "named": false
+  },
+  {
+    "type": "while",
     "named": false
   },
   {
