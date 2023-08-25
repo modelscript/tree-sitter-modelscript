@@ -22,6 +22,7 @@ module.exports = grammar({
     name: 'modelscript',
 
     conflicts: $ => [
+        [$.for_statement, $.object_constructor],
         [$.if_statement, $.object_constructor],
         [$.while_statement, $.object_constructor],
         [$.function_declaration, $.variable]
@@ -38,6 +39,7 @@ module.exports = grammar({
             $.continue_statement,
             $.empty_statement,
             $.expression_statement,
+            $.for_statement,
             $.function_declaration,
             $.if_statement,
             $.resource_declaration,
@@ -52,6 +54,13 @@ module.exports = grammar({
         empty_statement: $ => ';',
 
         expression_statement: $ => seq(field('expression', $._expression), ';'),
+
+        for_statement: $ => choice(
+            seq('for', '(', field('iterator', $.for_iterator), repeat(seq(',', field('iterator', $.for_iterator))), ')', field('statement', $._statement)),
+            seq('for', '(', field('iterator', $.for_iterator), repeat(seq(',', field('iterator', $.for_iterator))), ')', '{', repeat(field('statement', $._statement)), '}')
+        ),
+
+        for_iterator: $ => seq(field('name', $.name), optional(seq('in', field('context', $._single_expression)))),
 
         function_declaration: $ => choice(
             seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '{', repeat(field('statement', $._statement)), '}'),
