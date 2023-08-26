@@ -22,16 +22,20 @@ module.exports = grammar({
     name: 'modelscript',
 
     conflicts: $ => [
-        [$.for_statement, $.object_constructor],
-        [$.if_statement, $.object_constructor],
-        [$.while_statement, $.object_constructor],
-        [$.function_declaration, $.variable]
+        [$.statement_block, $.object_constructor],
+        [$.function_declaration, $.variable],
+        [$._expression, $.positional_argument]
     ],
 
     rules: {
 
         module: $ => seq(
-            repeat(field('statement', $._statement)), optional(field('expression', $._expression))
+            repeat(field('statement', $._statement))
+        ),
+
+        statement_block: $ => choice(
+            seq('{', repeat(field('statement', $._statement)), '}'),
+            field('statement', $._statement)
         ),
 
         _statement: $ => choice(
@@ -56,15 +60,14 @@ module.exports = grammar({
         expression_statement: $ => seq(field('expression', $._expression), ';'),
 
         for_statement: $ => choice(
-            seq('for', '(', field('iterator', $.for_iterator), repeat(seq(',', field('iterator', $.for_iterator))), ')', field('statement', $._statement)),
-            seq('for', '(', field('iterator', $.for_iterator), repeat(seq(',', field('iterator', $.for_iterator))), ')', '{', repeat(field('statement', $._statement)), '}')
+            seq('for', field('iterator', $.for_iterator), repeat(seq(',', field('iterator', $.for_iterator))), field('statement', $.statement_block))
         ),
 
         for_iterator: $ => seq(field('name', $.name), optional(seq('in', field('context', $._single_expression)))),
 
         function_declaration: $ => choice(
-            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '{', repeat(field('statement', $._statement)), '}'),
-            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '=>', field('expression', $._expression), ';')
+            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', field('statement', $.statement_block)),
+            seq(field('name', $.name), '(', optional(seq(field('parameter', $._parameter), repeat(seq(',', field('parameter', $._parameter))))), ')', '=>', field('expression', $._expression))
         ),
 
         _parameter: $ => choice(
@@ -73,9 +76,8 @@ module.exports = grammar({
 
         simple_parameter: $ => seq(field('name', $.name), optional(seq('=', field('defaultValue', $._single_expression)))),
 
-        if_statement: $ => choice(
-            seq('if', '(', field('condition', $._single_expression), ')', field('statement', $._statement)),
-            seq('if', '(', field('condition', $._single_expression), ')', '{', repeat(field('statement', $._statement)), '}')
+        if_statement: $ => prec.left(
+            seq('if', field('condition', $._single_expression), field('consequence', $._statement), optional(seq('else', field('alternative', $._statement)))),
         ),
 
         resource_declaration: $ => prec(PREC.GROUP14, seq(
@@ -89,8 +91,7 @@ module.exports = grammar({
         return_statement: $ => seq('return', optional(field('value', $._expression)), ';'),
 
         while_statement: $ => choice(
-            seq('while', '(', field('condition', $._single_expression), ')', field('statement', $._statement)),
-            seq('while', '(', field('condition', $._single_expression), ')', '{', repeat(field('statement', $._statement)), '}')
+            seq('while', field('condition', $._single_expression), field('statement', $._statement))
         ),
 
         _class_expression: $ => choice(
